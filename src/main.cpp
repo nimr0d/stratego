@@ -1,9 +1,11 @@
 #include <iostream>
 
+#include "../test/test.hpp"
+
 using namespace std;
 
 int main(){
-  cout << "hello stratego" << endl;
+  test();
   return 0;
 }
 
