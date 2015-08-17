@@ -37,6 +37,21 @@ bool Piece::operator<(const Piece& other) const{
   return value_ < other.value_;
 }
 
+bool Piece::operator!=(const Piece& other) const{
+  return !(this->operator==(other));
+}
+bool Piece::operator>(const Piece& other) const{
+  return (!this->operator<(other) && !this->operator==(other));
+}
+
+bool Piece::operator<=(const Piece& other) const{
+  return (this->operator==(other) || this->operator<(other));
+}
+
+bool Piece::operator>=(const Piece& other) const{
+  return !(this->operator<(other));
+}
+
 const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
 
 

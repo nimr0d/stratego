@@ -25,6 +25,11 @@ public:
   
   bool operator==(const Piece& other) const;
   bool operator<(const Piece& other) const; 
+
+  bool operator!=(const Piece& other) const;
+  bool operator> (const Piece& other) const; 
+  bool operator<=(const Piece& other) const; 
+  bool operator>=(const Piece& other) const; 
   // When piece is attacking other. No errors on undefined behavior.
 private:
   char value_;
@@ -32,5 +37,8 @@ private:
   
   static const char symbol_[];
 };
+
+
+
 
 #endif
