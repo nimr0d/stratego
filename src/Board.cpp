@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "Piece.hpp"
+#include "Player.hpp"
 
 void Board::print(Player _player) const{
   for(int i = 0; i < 10; i++){
@@ -27,5 +28,5 @@ void Board::print(Player _player) const{
   printf("\n");
 }
 
-void Board::Board(){
+Board::Board(){
 }

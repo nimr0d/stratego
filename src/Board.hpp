@@ -3,17 +3,21 @@
 
 #include <vector>
 
+#include "Piece.hpp"
+#include "Player.hpp"
+#include "Move.hpp"
+
 class Board{
 public:
   Board();
   float eval();
-  void print() const;
+  void print(Player) const;
   
   std::vector<Board> get_child_states();
   
 private:
   Board make_move(Move m);
-  Pieces board[10][10];
+  Piece board[10][10];
   Player player;
 };
 
