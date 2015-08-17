@@ -4,13 +4,14 @@
 #include <vector>
 
 #include "Piece.hpp"
+#include "Player.hpp"
 #include "Move.hpp"
 
 class Board{
 public:
   Board();
   float eval() const;
-  void print(bool player) const;
+  void print(Player player) const;
   
   std::vector<Board> get_child_states();
   

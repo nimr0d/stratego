@@ -1,13 +1,13 @@
 #include "Piece.hpp"
 
 Piece::Piece() : value_(0), player_(0) {}
-Piece::Piece(char value, bool player) : value_(value), player_(player) {}
+Piece::Piece(char value, Player player) : value_(value), player_(player) {}
 
 char Piece::value() const {
   return value_;
 }
 
-bool Piece::player() const {
+Player Piece::player() const {
   return player_;
 }
 
@@ -23,7 +23,7 @@ void Piece::set_value(char value) {
   value_ = value;
 }
 
-void Piece::set_player(bool player) {
+void Piece::set_player(Player player) {
   player_ = player;
 }
 

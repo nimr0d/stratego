@@ -1,6 +1,8 @@
 #ifndef _H_PIECE_
 #define _H_PIECE_
 
+#include "Player.hpp"
+
 #define EMPTY 0
 #define FLAG 1
 #define SPY 2
@@ -14,14 +16,14 @@ public:
   Piece();
   Piece(char value, bool player);
   char value() const;
-  bool player() const;
+  Player player() const;
   char symbol() const;
   bool empty() const;
   void set_value(char value);
-  void set_player(bool player);
+  void set_player(Player player);
 private:
   char value_;
-  bool player_;
+  Player player_;
   bool operator==(const Piece& other);
   bool operator<(const Piece& other); // When piece is attacking other. No errors on undefined behavior.
   

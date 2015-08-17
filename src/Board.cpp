@@ -8,7 +8,7 @@
 
 Board::Board() {}
 
-void Board::print(bool player) const{
+void Board::print(Player player) const{
   for(int i = 0; i < 10; ++i){
     for(int j = 0; j < 10; ++j){
       const Piece *tmp = &board_[i][j];
