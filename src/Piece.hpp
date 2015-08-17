@@ -1,7 +1,6 @@
 #ifndef _H_PIECE_
 #define _H_PIECE_
 
-
 enum PieceType{
   REGULAR,
   MINER,
@@ -13,19 +12,21 @@ enum PieceType{
 class Piece{
 public:
   Piece();
-  Piece(int num);
+  Piece(short num);
   
-  bool      is_special()      const;
-  PieceType get_type()        const;
-  int       get_value() const;
-private:
-  bool is_special_piece;
-  int  piece_value; //if not special
+  PieceType type() const;
+  short value() const;
+  void set_value(short value);
+  void set_type(PieceType type);
+private:  
+  short value;
+  bool player;
   PieceType type;
 };
 
-
+bool operator==(const Piece& p_left, const Piece& p_right);
 bool operator<(const Piece& p_left, const Piece& p_right);
+
 
 
 #endif
