@@ -8,7 +8,19 @@
 
 
 bool test_two_pieces(Piece strong, Piece weak){
-  return ((strong > weak) && (weak < strong));
+  bool works = ((strong > weak) && (weak < strong));
+  if(!works){
+    if(!(strong > weak)){
+      printf("%c > %c fails \n", strong.symbol(), weak.symbol());
+    }
+    if(!(weak < strong)){
+      printf("%c < %c fails \n", strong.symbol(), weak.symbol());
+    }
+    return false;
+  } 
+  else {
+    return true;
+  }
 }
 
 
