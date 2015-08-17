@@ -35,7 +35,6 @@ bool Piece::operator<(const Piece& other) const{
   if (value_ == MINER && other.value_ == BOMB) return false;
   if (value_ == BOMB && other.value_ == MINER) return true;
   if (value_ == SPY && other.value_ == MARSHAL) return false;
-  if (value_ == MARSHAL && other.value_ == SPY) return true;
   return value_ < other.value_;
 }
 
