@@ -3,14 +3,16 @@
 
 #include "Player.hpp"
 
-#define EMPTY 0
-#define FLAG 1
-#define SPY 2
-#define SCOUT 3
-#define MINER 4
-#define MARSHAL 11
-#define BOMB 12
-
+enum Piece_Type {
+  EMPTY = 0,
+  FLAG = 1,
+  SPY = 2,
+  SCOUT = 3,
+  MINER = 4,
+  MARSHAL = 11,
+  BOMB = 12,
+  UNKNOWN = 13,
+};
 
 class Piece{
 public:
@@ -22,19 +24,12 @@ public:
   bool empty() const;
   void set_value(char value);
   void set_player(Player player);
-  
   bool operator==(const Piece& other) const;
-  bool operator<(const Piece& other) const; 
-
   bool operator!=(const Piece& other) const;
-  bool operator> (const Piece& other) const; 
-  bool operator<=(const Piece& other) const; 
-  bool operator>=(const Piece& other) const; 
-  // When piece is attacking other. No errors on undefined behavior.
+  bool defeats(const Piece& other) const; // When piece is attacking other. No errors on undefined comparisons.
 private:
   char value_;
   Player player_;
-  
   static const char symbol_[];
 };
 
