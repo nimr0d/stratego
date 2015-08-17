@@ -37,3 +37,6 @@ bool Piece::operator<(const Piece& other){
   return value_ < other.value_;
 }
 
+const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
+
+

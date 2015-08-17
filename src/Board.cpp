@@ -5,7 +5,6 @@
 #include <stdio.h>
 
 #include "Piece.hpp"
-#include "Player.hpp"
 
 Board::Board() {}
 

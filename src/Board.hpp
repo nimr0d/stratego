@@ -1,16 +1,15 @@
-#ifndef _H_BOARD_CPP
-#define _H_BOARD_CPP
+#ifndef _H_BOARD_
+#define _H_BOARD_
 
 #include <vector>
 
 #include "Piece.hpp"
-#include "Player.hpp"
 #include "Move.hpp"
 
 class Board{
 public:
   Board();
-  float eval();
+  float eval() const;
   void print(bool player) const;
   
   std::vector<Board> get_child_states();

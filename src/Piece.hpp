@@ -22,9 +22,10 @@ public:
 private:
   char value_;
   bool player_;
-  char const symbol_[13] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
   bool operator==(const Piece& other);
   bool operator<(const Piece& other); // When piece is attacking other. No errors on undefined behavior.
+  
+  static const char symbol_[];
 };
 
 #endif
