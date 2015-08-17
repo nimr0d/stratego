@@ -18,7 +18,7 @@ public:
 private:
   Board make_move(Move m);
   Piece board_[10][10];
-  bool player_;
+  Player player_;
 };
 
 #endif
