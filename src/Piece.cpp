@@ -16,7 +16,7 @@ char Piece::symbol() const {
 }
 
 bool Piece::empty() const {
-  return value_ == 0;
+  return value_ == EMPTY;
 }
 
 void Piece::set_value(char value) {
@@ -26,7 +26,6 @@ void Piece::set_value(char value) {
 void Piece::set_player(bool player) {
   player_ = player;
 }
-
 
 bool Piece::operator==(const Piece& other) {
   return value_ == other.value_;
