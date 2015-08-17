@@ -27,11 +27,11 @@ void Piece::set_player(Player player) {
   player_ = player;
 }
 
-bool Piece::operator==(const Piece& other) {
+bool Piece::operator==(const Piece& other) const{
   return value_ == other.value_;
 }
 
-bool Piece::operator<(const Piece& other){
+bool Piece::operator<(const Piece& other) const{
   if (value_ == MINER && other.value_ == BOMB) return false;
   if (value_ == SPY && other.value_ == MARSHAL) return false;
   return value_ < other.value_;
