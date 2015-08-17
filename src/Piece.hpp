@@ -14,9 +14,11 @@ public:
   Piece();
   Piece(short num);
   
+  char get_char();
   PieceType type() const;
   short value() const;
   bool player() const;
+
   void set_type(PieceType type);
   void set_value(short value);
   void set_player(bool player);

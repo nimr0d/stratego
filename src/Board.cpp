@@ -16,7 +16,7 @@ void Board::print(Player _player) const{
       }
       else{
 	if(tmp.get_player() == _player){
-	  tmp.print();
+	  printf("%c", tmp.get_char());
 	} else{
 	  printf("?");
 	}
