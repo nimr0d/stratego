@@ -16,12 +16,14 @@ public:
   
   PieceType type() const;
   short value() const;
-  void set_value(short value);
+  bool player() const;
   void set_type(PieceType type);
-private:  
+  void set_value(short value);
+  void set_player(bool player);
+private:
+  PieceType type;
   short value;
   bool player;
-  PieceType type;
 };
 
 bool operator==(const Piece& p_left, const Piece& p_right);
