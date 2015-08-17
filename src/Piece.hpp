@@ -1,28 +1,30 @@
 #ifndef _H_PIECE_
 #define _H_PIECE_
 
-#define FLAG 0
-#define SPY 1
-#define SCOUT 2
-#define MINER 3
-#define MARSHAL 10
-#define BOMB 11
+#define EMPTY 0
+#define FLAG 1
+#define SPY 2
+#define SCOUT 3
+#define MINER 4
+#define MARSHAL 11
+#define BOMB 12
 
 class Piece{
 public:
   Piece();
-  Piece(short num);
-  short value() const;
+  Piece(char value, bool player);
+  char value() const;
   bool player() const;
-  void set_value(short value);
+  char symbol() const;
+  bool empty() const;
+  void set_value(char value);
   void set_player(bool player);
 private:
-  short value;
-  bool player;
+  char value_;
+  bool player_;
+  char const symbol_[13] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
+  bool operator==(const Piece& other);
+  bool operator<(const Piece& other); // When piece is attacking other. No errors on undefined behavior.
 };
-
-bool operator==(const Piece& p_left, const Piece& p_right);
-bool operator<(const Piece& p_left, const Piece& p_right);
-
 
 #endif

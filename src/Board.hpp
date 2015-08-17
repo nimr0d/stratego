@@ -11,14 +11,14 @@ class Board{
 public:
   Board();
   float eval();
-  void print(Player) const;
+  void print(bool player) const;
   
   std::vector<Board> get_child_states();
   
 private:
   Board make_move(Move m);
-  Piece board[10][10];
-  Player player;
+  Piece board_[10][10];
+  bool player_;
 };
 
 #endif
