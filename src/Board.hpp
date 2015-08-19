@@ -23,4 +23,9 @@ private:
   Player player_;
 };
 
+bool out_of_bounds(const int& row, const int& col);
+void get_position_moved(Move m, const int& row, const int& col, 
+			int* new_row, int* new_col);
+
+
 #endif
