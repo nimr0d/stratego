@@ -55,6 +55,11 @@ bool Board::is_player_allowed_to_move_piece(const int& row,const int& col) const
   return true;
 }
 
+bool is_piece_allowed_to_move(Piece p){
+  return !(p.value() == BOMB || p.value() == FLAG);
+}
+
+
 bool Board::is_move_allowed(Move m, int row, int col) const{
   if(!is_player_allowed_to_move_piece(row, col))
     return false;
@@ -64,7 +69,10 @@ bool Board::is_move_allowed(Move m, int row, int col) const{
   if( out_of_bounds(new_row, new_col) ){
     return false;
   }
-  /*should we check if the space is occupied by another piece of the same player*/
+  
+  is_piece_allowed_to_move(board_[row][col]);
+  /*should we check if the space is occupied by another piece
+    of the same player*/
   return true;
 }
 

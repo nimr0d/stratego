@@ -28,6 +28,6 @@ private:
 bool out_of_bounds(const int& row, const int& col);
 void get_position_moved(Move m, const int& row, const int& col, 
 			int* new_row, int* new_col);
-
+bool is_piece_allowed_to_move(Piece p);
 
 #endif
