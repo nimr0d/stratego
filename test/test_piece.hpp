@@ -17,6 +17,7 @@ bool test_two_pieces(Piece strong, Piece weak){
 
 
 void test_piece(){
+  printf("testing piece \n");
   printf("test case: %d \n", test_two_pieces(Piece(2, 0) , Piece(1, 0) ));
   printf("test case: %d \n", test_two_pieces(Piece(12, 0) ,Piece(6, 0) ));
   printf("test case: %d \n", test_two_pieces(Piece(4, 0) ,Piece(12, 0) ));
