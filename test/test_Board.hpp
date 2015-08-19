@@ -30,25 +30,25 @@ bool test_get_position_moved(){
   m = UP;
   row = 2; col = 2;
   get_position_moved(m, row, col, 
-		     n_row, n_col);
+		     &n_row, &n_col);
   all_cases_pass &= ((n_row ==  1) && (n_col == 2));
   
   m = DOWN;
   row = 2; col = 2;
   get_position_moved(m, row, col, 
-		     n_row, n_col);
+		     &n_row, &n_col);
   all_cases_pass &= ((n_row ==  3) && (n_col == 2));
 
   m = LEFT;
   row = 2; col = 2;
   get_position_moved(m, row, col, 
-		     n_row, n_col);
+		     &n_row, &n_col);
   all_cases_pass &= ((n_row ==  2) && (n_col == 1));
 
   m = RIGHT;
   row = 2; col = 2;
   get_position_moved(m, row, col, 
-		     n_row, n_col);
+		     &n_row, &n_col);
   all_cases_pass &= ((n_row ==  2) && (n_col == 3));
   
   return all_cases_pass; 
@@ -61,8 +61,7 @@ bool test_is_player_allowed_to_move_piece(){
 void test_Board(){
   std::cout << "testing board" << std::endl;
   cout << "testing out of bounds: " << test_out_of_bounds() << endl;
-  cout << "testing get position moved: " << test_out_of_bounds() << endl;
-  
+  cout << "testing get position moved: " << test_get_position_moved() << endl;
 }
 
 #endif 

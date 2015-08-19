@@ -11,11 +11,11 @@ Board::Board() {}
 
 bool out_of_bounds(const int& row, const int& col){
   if     (row >= 10 || row < 0)
-    return false;
-  else if(col >= 10 || col < 0)
-    return false;
-  else 
     return true;
+  else if(col >= 10 || col < 0)
+    return true;
+  else 
+    return false;
 }
 
 void get_position_moved(Move m, const int& row, const int& col, 
