@@ -9,6 +9,10 @@
 
 Board::Board() {}
 
+void Board::put_piece(Piece p, int row, int col){
+  board_[row][col] = p;
+}
+
 bool out_of_bounds(const int& row, const int& col){
   if     (row >= 10 || row < 0)
     return true;
@@ -66,11 +70,15 @@ bool Board::is_move_allowed(Move m, int row, int col) const{
 
 
 void Board::print(Player player) const{
+  for(int i = 0; i < 10; i++){
+    printf("__");
+  }
+  printf("\n");
   for(int i = 0; i < 10; ++i){
     for(int j = 0; j < 10; ++j){
       const Piece *tmp = &board_[i][j];
       if(tmp->empty()){
-	printf(" ");
+	printf(".");
       }
       else{
 	if(tmp->player() == player){
@@ -82,6 +90,9 @@ void Board::print(Player player) const{
       printf(" ");
     }
     printf("\n");
+  }
+  for(int i = 0; i < 10; i++){
+    printf("__");
   }
   printf("\n");
 }

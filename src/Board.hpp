@@ -18,6 +18,8 @@ public:
   bool is_player_allowed_to_move_piece(const int& row,const int& col) const;
   bool is_move_allowed(Move m, int row, int col) const;
   Board make_move(Move m) const;
+
+  void put_piece(Piece p, int row, int col);
 private:
   Piece board_[10][10];
   Player player_;
