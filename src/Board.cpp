@@ -1,28 +1,39 @@
 #include "Board.hpp"
 
 #include <unordered_map>
-
 #include <stdio.h>
 
 #include "Piece.hpp"
 #include "Move.hpp"
 
-Board::Board() {}
+Board::Board() : player_(0), eval_(0) {}
 
-void Board::put_piece(Piece p, int row, int col){
+float Board::evaluate() {
+  // TODO: evaluation code
+  eval_ = 0;
+  return eval_;
+}
+
+void Board::put_piece(Piece p, char pos) {
+  ((Piece *) board_)[pos] = p;
+}
+void Board::put_piece(Piece p, char row, char col){
   board_[row][col] = p;
 }
 
-bool out_of_bounds(const int& row, const int& col){
-  if     (row >= 10 || row < 0)
-    return true;
-  else if(col >= 10 || col < 0)
-    return true;
-  else 
-    return false;
+bool Board::operator==(const Board& other) const {
+  return eval_ == other.eval_;
 }
 
-void get_position_moved(Move m, const int& row, const int& col, 
+bool Board::operator<(const Board& other) const {
+  return eval_ < other.eval_;
+}
+
+bool out_of_bounds(int row, int col){
+  return 0 <= row && row < 10 && 0 <= col && col < 10;
+}
+
+void get_position_moved(Move m, int row, int col, 
 			int* new_row, int* new_col){
   switch(m){
   case UP:
@@ -44,7 +55,7 @@ void get_position_moved(Move m, const int& row, const int& col,
   }
 }
 
-bool Board::is_player_allowed_to_move_piece(const int& row,const int& col) const{
+bool Board::is_player_allowed_to_move_piece(int row,int col) const{
   if(out_of_bounds(row, col))
     return false;
   Piece tmp = board_[row][col];
@@ -66,7 +77,7 @@ bool Board::is_move_allowed(Move m, int row, int col) const{
   
   int new_row, new_col;
   get_position_moved(m, row, col, &new_row, &new_col);
-  if( out_of_bounds(new_row, new_col) ){
+  if(out_of_bounds(new_row, new_col) ){
     return false;
   }
   
@@ -78,7 +89,7 @@ bool Board::is_move_allowed(Move m, int row, int col) const{
 
 
 void Board::print(Player player) const{
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < 10; ++i){
     printf("__");
   }
   printf("\n");
@@ -99,7 +110,7 @@ void Board::print(Player player) const{
     }
     printf("\n");
   }
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < 10; ++i){
     printf("__");
   }
   printf("\n");
