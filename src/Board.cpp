@@ -61,8 +61,9 @@ bool Board::is_move_allowed(Direction m, int row, int col) const{
 
 
 bool Board::is_move_allowed(Move m) const{
-  Piece tmp = piece(m.from);
-  return m.to < 100 && m.from < 100 && tmp.player() == player_ && is_movable(tmp);
+  Piece p1 = piece(m.from);
+  Piece p2 = piece(m.from);
+  return m.to < 100 && m.from < 100 && p1.player() == player_ && is_movable(tmp) && (p2.empty() || p2.player() == !player_);
 }
 
 Board Board::make_move(Move m) const{
@@ -82,7 +83,7 @@ Board Board::make_move(Move m) const{
 std::priority_queue<Board> Board::get_child_states() const {
   // TODO: logic to replace find_all_moves() with something smarter
   std::priority_queue<Board> pq;
-  this->find_all_moves();
+  find_all_moves();
   for (Move m : moves_) {
     Board b = make_move(m);
     b.evaluate();
