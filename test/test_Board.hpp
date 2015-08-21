@@ -26,7 +26,7 @@ bool test_get_position_moved(){
   int n_row, n_col;
   int row, col;
   bool all_cases_pass = true;
-  Move m;
+  Direction m;
   
   m = UP;
   row = 2; col = 2;
