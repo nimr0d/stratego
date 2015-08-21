@@ -58,7 +58,7 @@ bool test_get_position_moved(){
 bool test_is_player_allowed_to_move_piece(){
   Board b;
   b.print(0);
-  b.put_piece(Piece(FLAG, 0), 2, 2);
+  b.set_piece(Piece(FLAG, 0), 2, 2);
   b.print(0);
 }
 

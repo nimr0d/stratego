@@ -16,14 +16,16 @@ public:
   std::priority_queue<Board> get_child_states() const;
   
   bool is_player_allowed_to_move_piece(int row, int col) const;
+
   bool is_move_allowed(Direction m, int row, int col) const;
   Board make_move(Move m) const;
-  
-  void put_piece(Piece p, char pos);
-  void put_piece(Piece p, char row, char col);
 
+  void  set_piece(Piece p, int row, int col);
+  Piece get_piece(int row, int col) const;
+  
   bool operator==(const Board& other) const;
   bool operator<(const Board& other) const;
+  
 private:
   Piece board_[10][10];
   std::vector<Move> moves_;
