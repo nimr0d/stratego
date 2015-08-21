@@ -3,6 +3,7 @@
 
 #include "test_piece.hpp"
 #include "test_Board.hpp"
+#include "test_BoardIO.hpp"
 
 
 void test(){
