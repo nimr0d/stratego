@@ -76,7 +76,6 @@ bool is_piece_allowed_to_move(Piece p){
   return !(p.value() == BOMB || p.value() == FLAG);
 }
 
-
 bool Board::is_move_allowed(Move m, int row, int col) const{
   if(!is_player_allowed_to_move_piece(row, col))
     return false;

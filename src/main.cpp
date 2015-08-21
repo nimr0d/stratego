@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+  cout << "Stratego" << endl;
   test();
   return 0;
 }
