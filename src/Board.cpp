@@ -1,12 +1,17 @@
 #include "Board.hpp"
 
 #include <unordered_map>
+
 #include <stdio.h>
+#include <assert.h>
 
 #include "Piece.hpp"
 #include "Move.hpp"
 
 Board::Board() : player_(0), eval_(0) {}
+
+
+
 
 float Board::evaluate() {
   // TODO: evaluation code
@@ -14,11 +19,12 @@ float Board::evaluate() {
   return eval_;
 }
 
-void Board::put_piece(Piece p, char pos) {
-  ((Piece *) board_)[pos] = p;
-}
-void Board::put_piece(Piece p, char row, char col){
+void Board::set_piece(Piece p, int row, int col){
   board_[row][col] = p;
+}
+
+Piece Board::get_piece(int row, int col) const{
+  return board_[row][col];
 }
 
 bool Board::operator==(const Board& other) const {
@@ -85,6 +91,24 @@ bool Board::is_move_allowed(Move m, int row, int col) const{
   /*should we check if the space is occupied by another piece
     of the same player*/
   return true;
+}
+
+
+Board Board::make_move(Move m, int row, int col) const{
+  Board new_B(*this);
+  assert(is_move_allowed(m, row, col) );
+
+  int n_row, n_col;
+  get_position_moved(m, row, col, &n_row, &n_col);
+  Piece p1 = new_B.get_piece(row, col);
+  Piece p2 = new_B.get_piece(n_row, n_col);
+  if(p1.defeats(p2)){
+    new_B.set_piece(Piece(EMPTY,player_), row, col);
+    new_B.set_piece(p1, n_row, n_col);
+  } else {
+    new_B.set_piece(Piece(EMPTY,player_), row, col);
+  }
+  return new_B;  
 }
 
 
