@@ -1,20 +1,27 @@
-all: main.o Board.o Piece.o Move.o BoardIO.o
-	g++ main.o Board.o Piece.o Move.o BoardIO.o -o stratego -std=c++11 -O3
 
-main.o : main.cpp
-	g++ -c main.cpp
+
+objects = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+#main.o Board.o Piece.o Move.o BoardIO.o
+
+CFLAGS  = -std=c++11 -O3
+
+all: $(objects)
+	g++ $(objects) -o stratego $(CFLAGS)
+
+#main.o : main.cpp
+#	g++ -c main.cpp
 
 Board.o : Board.cpp
-	g++ -c Board.cpp -std=c++11
+	g++ -c Board.cpp $(CFLAGS)
 
 Move.o : Move.cpp
-	g++ -c Move.cpp -std=c++11
+	g++ -c Move.cpp $(CFLAGS)
 
 BoardIO.o : BoardIO.cpp
-	g++ -c BoardIO.cpp -std=c++11
+	g++ -c BoardIO.cpp $(CFLAGS)
 
 Piece.o : Piece.cpp
-	g++ -c Piece.cpp -std=c++11
+	g++ -c Piece.cpp $(CFLAGS)
 
 
 auto: 
