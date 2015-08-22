@@ -11,9 +11,7 @@
 class Board {
 public:
   Board();
-  float evaluate(); // Evaluates board and returns value.
   void print(Player player) const;
-  std::priority_queue<Board> get_child_states() const;
   
   bool is_player_allowed_to_move_piece(int row, int col) const;
   bool is_move_allowed(Move m, int row, int col) const;

@@ -12,13 +12,6 @@ Board::Board() : player_(0), eval_(0) {}
 
 
 
-
-float Board::evaluate() {
-  // TODO: evaluation code
-  eval_ = 0;
-  return eval_;
-}
-
 void Board::set_piece(Piece p, int row, int col){
   board_[row][col] = p;
 }
