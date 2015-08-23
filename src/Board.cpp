@@ -20,7 +20,6 @@ Board::Board(const Board& b){
   player_ = b.player();
 }
 
-
 void Board::set_piece(Piece p, int row, int col){
   board_[row][col] = p;
 }
@@ -63,11 +62,12 @@ bool Board::is_move_allowed(Move m) const{
   if(!m.is_valid(board_[m.row][m.col])){
     return false;
   }
-  /*should we check if the space is occupied by another piece
-    of the same player?*/
+  
+  if(board_[m.row][m.col].player() == board_[m.n_row][m.n_col].player())
+    return false;
+  
   return true;
 }
-
 
 MoveResult Board::get_move_result(Move m) const{
   if(! is_move_allowed(m)){
@@ -100,7 +100,6 @@ Board Board::make_move(Move m) const{
   }
   return new_B;  
 }
-
 
 void Board::print(Player player) const{
   for(int i = 0; i < 10; ++i){

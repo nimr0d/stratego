@@ -7,7 +7,7 @@ class HumanPlayer : public Participent{
 public:
   Move get_move();
   void send_results_of_move(MoveResult);
-  ~HumanPlayer();
+  //  ~HumanPlayer();
 };
 
 

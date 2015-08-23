@@ -34,5 +34,6 @@ private:
   static const char symbol_[];
 };
 
+char symbol_from_value(char value);
 
 #endif

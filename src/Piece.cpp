@@ -46,6 +46,10 @@ bool Piece::is_allowed_to_move() const{
   return !( value_ == BOMB ||  value_ == FLAG);
 }
 
+char symbol_from_value(char value){
+  return Piece(value, 0).symbol();
+}
+
 const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
 
 

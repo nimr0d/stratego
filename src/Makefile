@@ -1,6 +1,7 @@
 
 
-objects = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+#objects = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+objects = $(wildcard *.cpp)
 #main.o Board.o Piece.o Move.o BoardIO.o
 CFLAGS  = -std=c++11 -O3
 

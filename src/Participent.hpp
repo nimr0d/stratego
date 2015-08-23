@@ -16,7 +16,7 @@ class Participent{
 public:
   virtual Move get_move();
   virtual void send_results_of_move(MoveResult);
-  virtual ~Participent();
+  //  virtual ~Participent();
 };
 
 
