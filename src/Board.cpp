@@ -9,7 +9,14 @@
 #include "Move.hpp"
 
 Board::Board() : player_(0){}
-
+Board::Board(const Board& b){
+  for(int i = 0; i < 10; i++){
+    for(int j = 0; j < 10; j++){
+      board_[i][j] = b.get_piece(i, j);
+    }
+  }
+  player_ = b.player();
+}
 
 
 void Board::set_piece(Piece p, int row, int col){
@@ -20,6 +27,9 @@ Piece Board::get_piece(int row, int col) const{
   return board_[row][col];
 }
 
+Player Board::player() const{
+  return player_;
+}
 bool out_of_bounds(int row, int col){
   return !(0 <= row && row < 10 && 0 <= col && col < 10);
 }

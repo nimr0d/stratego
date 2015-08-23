@@ -11,6 +11,7 @@
 class Board {
 public:
   Board();
+  Board(const Board& );
   void print(Player player) const;
   
   bool is_player_allowed_to_move_piece(int row, int col) const;
@@ -20,7 +21,9 @@ public:
   
   void  set_piece(Piece p, int row, int col);
   Piece get_piece(int row, int col) const;
+  Player player() const;
   
+
   bool operator==(const Board& other) const;
   bool operator<(const Board& other) const;
   
