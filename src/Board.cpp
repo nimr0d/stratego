@@ -7,8 +7,10 @@
 
 #include "Piece.hpp"
 #include "Move.hpp"
+#include "MoveResult.hpp"
 
 Board::Board() : player_(0){}
+
 Board::Board(const Board& b){
   for(int i = 0; i < 10; i++){
     for(int j = 0; j < 10; j++){
@@ -66,6 +68,22 @@ bool Board::is_move_allowed(Move m) const{
   return true;
 }
 
+
+MoveResult Board::get_move_result(Move m) const{
+  if(! is_move_allowed(m)){
+    return MoveResult(false, false , false, 0);
+  }
+  Piece p1 = get_piece(m.row, m.col);
+  Piece p2 = get_piece(m.n_row, m.n_col);
+  if(p2.value() == FLAG){
+    return MoveResult(true, true , true, FLAG);
+  } 
+  if(p1.defeats(p2)){
+    return MoveResult(true, false, true, p2.value());
+  } else {
+    return MoveResult(true, false, false, p2.value());
+  }
+}
 
 Board Board::make_move(Move m) const{
   Board new_B(*this);
