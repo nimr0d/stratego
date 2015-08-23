@@ -1,10 +1,15 @@
 #ifndef _H_MOVE_
 #define _H_MOVE_
 
-enum Move {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
+#include "Piece.hpp"
+
+
+//typedef struct Move Move;
+struct Move{
+  int row  , col;    // initial position
+  int n_row, n_col; //  final position
+  
+  bool is_valid(Piece p) const;
 };
+
 #endif

@@ -14,8 +14,8 @@ public:
   void print(Player player) const;
   
   bool is_player_allowed_to_move_piece(int row, int col) const;
-  bool is_move_allowed(Move m, int row, int col) const;
-  Board make_move(Move m, int row, int col) const;
+  bool is_move_allowed(Move m) const;
+  Board make_move(Move m) const;
   
   
   void  set_piece(Piece p, int row, int col);
@@ -26,14 +26,10 @@ public:
   
 private:
   Piece board_[10][10];
-  std::vector<Move> moves;
   Player player_;
-  float eval_;
 };
 
 bool out_of_bounds(int row, int col);
-void get_position_moved(Move m, int row, int col, 
-			int* new_row, int* new_col);
 bool is_piece_allowed_to_move(Piece p);
 
 #endif

@@ -2,14 +2,13 @@
 
 objects = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
 #main.o Board.o Piece.o Move.o BoardIO.o
-
 CFLAGS  = -std=c++11 -O3
 
 all: $(objects)
 	g++ $(objects) -o stratego $(CFLAGS)
 
-#main.o : main.cpp
-#	g++ -c main.cpp
+main.o : main.cpp
+	g++ -c main.cpp $(CFLAGS)
 
 Board.o : Board.cpp
 	g++ -c Board.cpp $(CFLAGS)
@@ -23,12 +22,5 @@ BoardIO.o : BoardIO.cpp
 Piece.o : Piece.cpp
 	g++ -c Piece.cpp $(CFLAGS)
 
-
-auto: 
-	make bring_back; make; make clean;
-
 clean: 
 	mv *.o ../build/
-
-bring_back:
-	mv ../build/*.o .

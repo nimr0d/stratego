@@ -8,7 +8,7 @@
 #include "Piece.hpp"
 #include "Move.hpp"
 
-Board::Board() : player_(0), eval_(0) {}
+Board::Board() : player_(0){}
 
 
 
@@ -20,38 +20,8 @@ Piece Board::get_piece(int row, int col) const{
   return board_[row][col];
 }
 
-bool Board::operator==(const Board& other) const {
-  return eval_ == other.eval_;
-}
-
-bool Board::operator<(const Board& other) const {
-  return eval_ < other.eval_;
-}
-
 bool out_of_bounds(int row, int col){
-  return 0 <= row && row < 10 && 0 <= col && col < 10;
-}
-
-void get_position_moved(Move m, int row, int col, 
-			int* new_row, int* new_col){
-  switch(m){
-  case UP:
-    *new_row = row - 1;
-    *new_col = col;
-    break;
-  case DOWN:
-    *new_row = row + 1;
-    *new_col = col;
-    break;
-  case LEFT:
-    *new_row = row;
-    *new_col = col - 1;
-    break;
-  case RIGHT:
-    *new_row = row;
-    *new_col = col + 1;
-    break;
-  }
+  return !(0 <= row && row < 10 && 0 <= col && col < 10);
 }
 
 bool Board::is_player_allowed_to_move_piece(int row,int col) const{
@@ -69,36 +39,39 @@ bool is_piece_allowed_to_move(Piece p){
   return !(p.value() == BOMB || p.value() == FLAG);
 }
 
-bool Board::is_move_allowed(Move m, int row, int col) const{
-  if(!is_player_allowed_to_move_piece(row, col))
+bool Board::is_move_allowed(Move m) const{
+  if(!is_player_allowed_to_move_piece(m.row, m.col))
     return false;
   
-  int new_row, new_col;
-  get_position_moved(m, row, col, &new_row, &new_col);
-  if(out_of_bounds(new_row, new_col) ){
+  if(out_of_bounds(m.n_row, m.n_col) ){
     return false;
   }
   
-  is_piece_allowed_to_move(board_[row][col]);
+  if(!is_piece_allowed_to_move(board_[m.row][m.col])){
+    return false;
+  }
+  
+  if(!m.is_valid(board_[m.row][m.col])){
+    return false;
+  }
   /*should we check if the space is occupied by another piece
-    of the same player*/
+    of the same player?*/
   return true;
 }
 
 
-Board Board::make_move(Move m, int row, int col) const{
+Board Board::make_move(Move m) const{
   Board new_B(*this);
-  assert(is_move_allowed(m, row, col) );
+  assert(is_move_allowed(m) );
 
-  int n_row, n_col;
-  get_position_moved(m, row, col, &n_row, &n_col);
-  Piece p1 = new_B.get_piece(row, col);
-  Piece p2 = new_B.get_piece(n_row, n_col);
+  
+  Piece p1 = new_B.get_piece(m.row, m.col);
+  Piece p2 = new_B.get_piece(m.n_row, m.n_col);
   if(p1.defeats(p2)){
-    new_B.set_piece(Piece(EMPTY,player_), row, col);
-    new_B.set_piece(p1, n_row, n_col);
+    new_B.set_piece(Piece(EMPTY,player_), m.row, m.col);
+    new_B.set_piece(p1, m.n_row, m.n_col);
   } else {
-    new_B.set_piece(Piece(EMPTY,player_), row, col);
+    new_B.set_piece(Piece(EMPTY,player_), m.row, m.col);
   }
   return new_B;  
 }

@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "../test/test.hpp"
+//#include "../test/test.hpp"
 
 using namespace std;
 
 int main(){
   cout << "Stratego" << endl;
-  test();
+  //  test();
   return 0;
 }
 
