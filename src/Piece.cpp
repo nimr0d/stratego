@@ -42,6 +42,10 @@ bool Piece::defeats(const Piece& other) const{
   return value_ >= other.value_;
 }
 
+bool Piece::is_allowed_to_move() const{
+  return !( value_ == BOMB ||  value_ == FLAG);
+}
+
 const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
 
 

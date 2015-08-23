@@ -30,6 +30,7 @@ Piece Board::get_piece(int row, int col) const{
 Player Board::player() const{
   return player_;
 }
+
 bool out_of_bounds(int row, int col){
   return !(0 <= row && row < 10 && 0 <= col && col < 10);
 }
@@ -45,10 +46,6 @@ bool Board::is_player_allowed_to_move_piece(int row,int col) const{
   return true;
 }
 
-bool is_piece_allowed_to_move(Piece p){
-  return !(p.value() == BOMB || p.value() == FLAG);
-}
-
 bool Board::is_move_allowed(Move m) const{
   if(!is_player_allowed_to_move_piece(m.row, m.col))
     return false;
@@ -57,7 +54,7 @@ bool Board::is_move_allowed(Move m) const{
     return false;
   }
   
-  if(!is_piece_allowed_to_move(board_[m.row][m.col])){
+  if(! board_[m.row][m.col].is_allowed_to_move() ){
     return false;
   }
   

@@ -33,6 +33,5 @@ private:
 };
 
 bool out_of_bounds(int row, int col);
-bool is_piece_allowed_to_move(Piece p);
 
 #endif

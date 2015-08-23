@@ -27,13 +27,12 @@ public:
   bool operator==(const Piece& other) const;
   bool operator!=(const Piece& other) const;
   bool defeats(const Piece& other) const; // When piece is attacking other. No errors on undefined comparisons.
+  bool is_allowed_to_move() const;
 private:
   char value_;
   Player player_;
   static const char symbol_[];
 };
-
-
 
 
 #endif
