@@ -12,6 +12,7 @@ Move::Move(int r,int c,int r_n,int c_n){
   n_row = r_n;
   n_col = c_n;
 }
+
 bool Move::is_valid(Piece p) const{
   if(p.value() == SCOUT){
     bool going_up_or_down = abs(n_row - row) >= 1 && (n_col == col);

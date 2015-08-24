@@ -1,6 +1,7 @@
 #include "Board.hpp"
 
 #include <unordered_map>
+#include <iostream>
 
 #include <stdio.h>
 #include <assert.h>
@@ -8,6 +9,13 @@
 #include "Piece.hpp"
 #include "Move.hpp"
 #include "MoveResult.hpp"
+
+using std::endl;
+using std::cout;
+
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
+
 
 Board::Board() : player_(0){}
 
@@ -47,25 +55,55 @@ bool Board::is_player_allowed_to_move_piece(int row,int col) const{
   return true;
 }
 
+bool Board::is_scout_move_valid(Move m) const{
+  if(m.row == m.n_row){
+    int big_col   = MAX(m.col, m.n_col);
+    int small_col = MIN(m.col, m.n_col);
+    for(int i = small_col + 1; i < big_col; i++){
+      if(!board_[m.row][i].empty()){
+	return false; 
+      }
+    }
+    return true;
+  } else {
+    int big_row   = MAX(m.row, m.n_row);
+    int small_row = MIN(m.row, m.n_row);
+    for(int i = small_row + 1; i < big_row; i++){
+      if(!board_[i][m.col].empty()){
+	return false; 
+      }
+    }
+    return true;
+  }
+}
+
+
 bool Board::is_move_allowed(Move m) const{
+  //cout << "here 0" << endl;
   if(!is_player_allowed_to_move_piece(m.row, m.col))
     return false;
-  
+  //  cout << "here 1" << endl;
   if(out_of_bounds(m.n_row, m.n_col) ){
     return false;
   }
-  
+  //cout << "here 2" << endl;
   if(! board_[m.row][m.col].is_allowed_to_move() ){
     return false;
   }
-  
+  //cout << "here 3" << endl;
   if(!m.is_valid(board_[m.row][m.col])){
     return false;
   }
-  
-  if(board_[m.row][m.col].player() == board_[m.n_row][m.n_col].player())
+  if(board_[m.row][m.col].value() == SCOUT){
+    //cout << "solving for the scout" << endl;
+    if(!is_scout_move_valid(m))
+      return false;
+  }
+  //cout << "here 4" << endl;
+  if(board_[m.row][m.col].player() == board_[m.n_row][m.n_col].player() && 
+     !board_[m.n_row][m.n_col].empty())
     return false;
-  
+  //cout << "here 5" << endl;
   return true;
 }
 

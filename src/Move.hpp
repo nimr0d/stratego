@@ -4,6 +4,7 @@
 #include "Piece.hpp"
 
 
+
 //typedef struct Move Move;
 struct Move{
   Move(int,int,int,int);
@@ -12,5 +13,6 @@ struct Move{
   
   bool is_valid(Piece p) const;
 };
+
 
 #endif

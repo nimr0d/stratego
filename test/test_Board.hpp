@@ -43,16 +43,40 @@ bool test_set_get_piece(){
 bool test_is_move_allowed(){
   Board b;
   b.set_piece(Piece(6,0), 2, 2);
-  b.print(0);
+  b.set_piece(Piece(6,0), 2, 3);
+  b.set_piece(Piece(6,1), 2, 4);
+  b.set_piece(Piece(6,0), 3, 4);
+  b.set_piece(Piece(SCOUT,0), 4, 4);
+  //b.print(0);
   
   bool all_is_valid = true;
-  all_is_valid &= b.is_move_allowed(Move(2,2, 3,2) );
+  
+  all_is_valid &=  b.is_move_allowed( Move(2,2, 3,2) );
+  all_is_valid &=  !b.is_move_allowed(Move(2,2, 3,3) );
+  all_is_valid &=  b.is_move_allowed( Move(2,2, 2,1) );
+  all_is_valid &=  b.is_move_allowed( Move(2,2, 2,1) );
+  all_is_valid &=  !b.is_move_allowed(Move(2,1, 2,2) );
+  all_is_valid &=  !b.is_move_allowed(Move(2,2, 2,2) );
+  all_is_valid &=  !b.is_move_allowed(Move(2,3, 2,2) );
+  all_is_valid &=  b.is_move_allowed( Move(2,3, 2,4)  );
+  all_is_valid &=  b.is_move_allowed( Move(4,4, 4,9)  );
+  all_is_valid &=  !b.is_move_allowed( Move(4,4, 0,4)  );
   
   return all_is_valid;
 }
 
 bool test_make_move(){
+  Board b;
+  bool all_is_valid = true;
+  b.set_piece(Piece(6,0), 2, 2);
+  b = b.make_move(Move(2,2,3,2));
+  b = b.make_move(Move(3,2,3,3));
+  all_is_valid = (Piece(6,0) == b.get_piece(3,3));
   
+  b.set_piece(Piece(5,1), 3,4);
+  b = b.make_move(Move(3,3,3,4));
+  b.print(0);
+  return all_is_valid;
 }
 
 bool test_make_move_result(){
@@ -65,6 +89,7 @@ void test_Board(){
   cout << "testing out of bounds: " << test_out_of_bounds() << endl;
   cout << "testing get_set: " << test_set_get_piece() << endl;
   cout << "testing is_move_allowed: " << test_is_move_allowed() << endl;
+  cout << "testing make move: " << test_make_move() << endl;
 }
 
 #endif 

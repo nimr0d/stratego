@@ -25,6 +25,7 @@ public:
   Piece get_piece(int row, int col) const;
   Player player() const;
   
+  bool is_scout_move_valid(Move m) const;
 private:
   Piece board_[10][10];
   Player player_;
