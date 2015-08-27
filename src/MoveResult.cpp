@@ -4,12 +4,8 @@
 
 #include "Piece.hpp"
 
-MoveResult::MoveResult(bool v_, bool wtg_, bool def_, char voe_) {
-  valid_ = v_;
-  won_the_game_ = wtg_;
-  defeated_ = def_;
-  value_of_enemy_ = voe_;
-}
+MoveResult::MoveResult(bool v, bool wtg, bool def, char voe) :
+   valid_(v), won_the_game_(wtg), defeated_(def), value_of_enemy_(voe) {}
 
 void MoveResult::print() const {
   if(won_the_game_){

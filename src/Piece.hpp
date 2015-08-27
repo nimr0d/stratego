@@ -1,8 +1,6 @@
 #ifndef _H_PIECE_
 #define _H_PIECE_
 
-#include "Player.hpp"
-
 enum Piece_Type {
   EMPTY = 0,
   FLAG = 1,
@@ -17,21 +15,21 @@ enum Piece_Type {
 class Piece{
 public:
   Piece();
-  Piece(char value, Player player);
+  Piece(char value, bool player);
   char value() const;
-  Player player() const;
+  bool player() const;
   char symbol() const;
   static char symbol(char value);
   bool empty() const;
   void set_value(char value);
-  void set_player(Player player);
+  void set_player(bool player);
   bool operator==(const Piece& other) const;
   bool operator!=(const Piece& other) const;
   bool defeats(const Piece& other) const; // When piece is attacking other. No errors on undefined comparisons.
   bool is_movable() const;
 private:
   char value_;
-  Player player_;
+  bool player_;
   static const char symbol_[];
 };
 

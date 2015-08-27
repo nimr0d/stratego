@@ -3,10 +3,8 @@
 
 #include <iostream>
 
-
 #include <stdlib.h>
 #include <time.h>
-
 
 #include "../src/Board.hpp"
 #include "../src/Piece.hpp"
@@ -51,16 +49,16 @@ bool test_is_move_allowed(){
   
   bool all_is_valid = true;
   
-  all_is_valid &=  b.is_move_allowed( Move(2,2, 3,2) );
-  all_is_valid &=  !b.is_move_allowed(Move(2,2, 3,3) );
-  all_is_valid &=  b.is_move_allowed( Move(2,2, 2,1) );
-  all_is_valid &=  b.is_move_allowed( Move(2,2, 2,1) );
-  all_is_valid &=  !b.is_move_allowed(Move(2,1, 2,2) );
-  all_is_valid &=  !b.is_move_allowed(Move(2,2, 2,2) );
-  all_is_valid &=  !b.is_move_allowed(Move(2,3, 2,2) );
-  all_is_valid &=  b.is_move_allowed( Move(2,3, 2,4)  );
-  all_is_valid &=  b.is_move_allowed( Move(4,4, 4,9)  );
-  all_is_valid &=  !b.is_move_allowed( Move(4,4, 0,4)  );
+  all_is_valid &= b.is_move_allowed( Move(2,2, 3,2));
+  all_is_valid &= !b.is_move_allowed(Move(2,2, 3,3));
+  all_is_valid &= b.is_move_allowed( Move(2,2, 2,1));
+  all_is_valid &= b.is_move_allowed( Move(2,2, 2,1));
+  all_is_valid &= !b.is_move_allowed(Move(2,1, 2,2));
+  all_is_valid &= !b.is_move_allowed(Move(2,2, 2,2));
+  all_is_valid &= !b.is_move_allowed(Move(2,3, 2,2));
+  all_is_valid &= b.is_move_allowed( Move(2,3, 2,4));
+  all_is_valid &= b.is_move_allowed( Move(4,4, 4,9));
+  all_is_valid &= !b.is_move_allowed( Move(4,4, 0,4));
   
   return all_is_valid;
 }

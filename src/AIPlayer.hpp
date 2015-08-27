@@ -1,9 +1,9 @@
 #ifndef _H_AI_PLAYER_
 #define _H_AI_PLAYER_
 
-#include "Participent.hpp"
+#include "Player.hpp"
 
-class AIPlayer : public Participent{
+class AIPlayer : public Player {
 public:
   Move get_move();
   void send_results_of_move(MoveResult);

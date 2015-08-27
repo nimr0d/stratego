@@ -5,16 +5,14 @@
 
 #include <stdio.h>
 
-#include "Board.hpp"
 #include "Piece.hpp"
-#include "Player.hpp"
 
 
-void print_board(const Board& b, Player p){
+void print_board(const Board& b, bool p){
   b.print(p);
 }
 
-void write_board_to_file(std::string file_name, const Board& b, Player p){
+void write_board_to_file(std::string file_name, const Board& b, bool p){
   FILE* fd = fopen(file_name.c_str(), "w");
   for(int i = 0; i < 10; ++i){
     fprintf(fd,"__");

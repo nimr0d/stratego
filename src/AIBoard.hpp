@@ -6,7 +6,6 @@
 
 #include "AIMove.hpp"
 #include "Piece.hpp"
-#include "Player.hpp"
 
 class AIBoard {
 public:
@@ -15,8 +14,8 @@ public:
 
   Piece piece(char pos) const;
   void set_piece(Piece p, char pos);
-  Player player() const;
-  void set_player(Player player);
+  bool player() const;
+  void set_player(bool player);
   
   bool is_move_allowed(Move m) const;
   AIBoard make_move(Move m) const;
@@ -25,13 +24,11 @@ public:
   
   bool operator==(const AIBoard& other) const;
   bool operator<(const AIBoard& other) const;
-
-  void print(Player player) const;
   
 private:
   Piece board_[10][10];
   std::vector<Move> moves_;
-  Player player_;
+  bool player_;
   float eval_;
   static void find_all_moves(); // FIXME: Make not static
 };

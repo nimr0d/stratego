@@ -19,11 +19,11 @@ void AIBoard::set_piece(Piece p, char pos) {
   ((Piece *) board_)[pos] = p; 
 }
 
-Player AIBoard::player() const{
+bool AIBoard::player() const{
   return player_;
 }
 
-void AIBoard::set_player(Player player) {
+void AIBoard::set_player(bool player) {
   player_ = player;
 }
 

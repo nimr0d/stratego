@@ -35,7 +35,7 @@ Piece Board::piece(int row, int col) const{
 void Board::set_piece(Piece p, int row, int col){
   board_[row][col] = p;
 }
-Player Board::player() const{
+bool Board::player() const{
   return player_;
 }
 
@@ -111,7 +111,7 @@ Board Board::make_move(Move m) const{
 }
 
 
-void Board::print(Player player) const{
+void Board::print(bool player) const{
   for(int i = 0; i < 10; ++i){
     printf("__");
   }

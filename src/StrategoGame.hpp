@@ -4,18 +4,17 @@
 
 #include "Move.hpp"
 #include "Player.hpp"
-#include "Participent.hpp"
 #include "Board.hpp"
 
 class StrategoGame{
 public:
   StrategoGame();
   void play_game();
-  Move        ask_participent_to_make_move(Player p);
-  void        send_move_result_to_participent(MoveResult move_result, Player p);
+  Move ask_player_to_make_move(bool p);
+  void send_move_result_to_player(MoveResult move_result, bool p);
 private:
-  Board _state;
-  Participent participents_[2];
+  Board state_;
+  Player players_[2];
 };
 
 
