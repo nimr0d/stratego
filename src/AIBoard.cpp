@@ -19,7 +19,7 @@ void AIBoard::set_piece(Piece p, char pos) {
   ((Piece *) board_)[pos] = p; 
 }
 
-bool AIBoard::player() const{
+bool AIBoard::player() const {
   return player_;
 }
 
@@ -27,13 +27,13 @@ void AIBoard::set_player(bool player) {
   player_ = player;
 }
 
-bool AIBoard::is_move_allowed(Move m) const{
+bool AIBoard::is_move_allowed(Move m) const {
   Piece p1 = piece(m.from);
   Piece p2 = piece(m.to);
   return m.to < 100 && m.from < 100 && p1.player() == player_ && p1.is_movable() && (p2.empty() || p2.player() == !player_);
 }
 
-AIBoard AIBoard::make_move(Move m) const{
+AIBoard AIBoard::make_move(Move m) const {
   assert(is_move_allowed(m));
   AIBoard n_b(*this);
   Piece p1 = n_b.piece(m.from);
@@ -73,8 +73,4 @@ void AIBoard::find_all_moves() {
       // TODO: add all moves
     }
   }
-}
-
-bool out_of_bounds(int row, int col){
-  return !(0 <= row && row < 10 && 0 <= col && col < 10);
 }
