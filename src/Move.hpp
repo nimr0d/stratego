@@ -3,7 +3,6 @@
 
 #include "Piece.hpp"
 
-//typedef struct Move Move;
 struct Move{
   Move(int,int,int,int);
   int row, col; // initial position
@@ -11,5 +10,6 @@ struct Move{
   
   bool is_valid(Piece p) const;
 };
+
 
 #endif

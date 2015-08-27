@@ -1,6 +1,7 @@
 #include "Board.hpp"
 
 #include <unordered_map>
+#include <iostream>
 
 #include <stdio.h>
 #include <assert.h>
@@ -8,6 +9,13 @@
 #include "Piece.hpp"
 #include "Move.hpp"
 #include "MoveResult.hpp"
+
+using std::endl;
+using std::cout;
+
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
+
 
 Board::Board() : player_(0){}
 
@@ -36,12 +44,38 @@ bool Board::player_allowed_to_move_piece(int row, int col) const{
   return in_bounds(row, col) && tmp.player() == player_ && !tmp.empty();
 }
 
+bool Board::is_scout_move_valid(Move m) const {
+  if(m.row == m.n_row){
+    int big_col = MAX(m.col, m.n_col);
+    int small_col = MIN(m.col, m.n_col);
+    for(int i = small_col + 1; i < big_col; ++i) {
+      if(!board_[m.row][i].empty()) {
+        return false; 
+      }
+    }
+    return true;
+  } else {
+    int big_row = MAX(m.row, m.n_row);
+    int small_row = MIN(m.row, m.n_row);
+    for(int i = small_row + 1; i < big_row; ++i) {
+      if(!board_[i][m.col].empty()) {
+        return false; 
+      }
+    }
+    return true;
+  }
+}
 
 bool Board::is_move_allowed(Move m) const {
+  if(board_[m.row][m.col].value() == SCOUT) {
+    if(!is_scout_move_valid(m)) {
+      return false;
+    }
+  }
   return player_allowed_to_move_piece(m.row, m.col) &&
         in_bounds(m.n_row, m.n_col) && board_[m.row][m.col].is_movable() &&
         m.is_valid(board_[m.row][m.col]) &&
-        board_[m.row][m.col].player() != board_[m.n_row][m.n_col].player();
+        (board_[m.row][m.col].player() != board_[m.n_row][m.n_col].player() || board_[m.n_row][m.n_col].empty());
 }
 
 MoveResult Board::get_move_result(Move m) const{

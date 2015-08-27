@@ -25,6 +25,7 @@ public:
   void  set_piece(Piece p, int row, int col);
   Player player() const;
   
+  bool is_scout_move_valid(Move m) const;
 private:
   Piece board_[10][10];
   Player player_;
