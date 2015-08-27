@@ -15,6 +15,10 @@ char Piece::symbol() const {
   return symbol_[value_];
 }
 
+char Piece::symbol(char value) {
+  return symbol_[value];
+}
+
 bool Piece::empty() const {
   return value_ == EMPTY;
 }
@@ -27,19 +31,23 @@ void Piece::set_player(Player player) {
   player_ = player;
 }
 
-bool Piece::operator==(const Piece& other) const{
+bool Piece::operator==(const Piece& other) const {
   return value_ == other.value_;
 }
 
-bool Piece::operator!=(const Piece& other) const{
+bool Piece::operator!=(const Piece& other) const {
   return !(this->operator==(other));
 }
 
-bool Piece::defeats(const Piece& other) const{
+bool Piece::defeats(const Piece& other) const {
   if (value_ == MINER && other.value_ == BOMB) return true;
   if (value_ == BOMB && other.value_ == MINER) return false;
   if (value_ == SPY && other.value_ == MARSHAL) return true;
   return value_ >= other.value_;
+}
+
+bool Piece::is_movable() const {
+  return !(value_ == BOMB || value_ == FLAG || value_ == EMPTY);
 }
 
 const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
