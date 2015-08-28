@@ -7,6 +7,7 @@ class HumanPlayer : public Player {
 public:
   virtual Move get_move() override;
   virtual void send_results_of_move(MoveResult) override;
+  virtual bool is_human();
   //  ~HumanPlayer();
 };
 

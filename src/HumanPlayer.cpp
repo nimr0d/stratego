@@ -18,15 +18,16 @@ Move HumanPlayer::get_move() {
   cin >> col;
   cin >> n_row;
   cin >> n_col;
+  return Move(row,col, n_row, n_col);
 }
 
 void HumanPlayer::send_results_of_move(MoveResult move_result) {
   move_result.print();
 }
 
+bool HumanPlayer::is_human(){
+  return true;
+}
 
-/*
-HumanPlayer::~HumanPlayer(){
-  cout<< "destroying humanPlayer" << endl;
-}*/
+
 

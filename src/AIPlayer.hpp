@@ -5,9 +5,10 @@
 
 class AIPlayer : public Player {
 public:
-  Move get_move();
-  void send_results_of_move(MoveResult);
-  ~AIPlayer();
+  virtual Move get_move();
+  virtual void send_results_of_move(MoveResult);
+  virtual bool is_human();
+  //  ~AIPlayer();
 };
 
 
