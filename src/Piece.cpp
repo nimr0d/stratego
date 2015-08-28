@@ -31,7 +31,6 @@ void Piece::set_player(bool player) {
   player_ = player;
 }
 
-
 bool Piece::operator==(const Piece& other) const{
   return value_ == other.value_ && player_ == other.player_;
 }

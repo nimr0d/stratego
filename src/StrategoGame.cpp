@@ -9,11 +9,11 @@
 #include "Player.hpp"
 
 Move StrategoGame::ask_player_to_make_move(bool p){
-  return players_[p].get_move();
+  return players_[p]->get_move();
 }
 
 void StrategoGame::send_move_result_to_player(MoveResult move_result, bool p){
-  players_[p].send_results_of_move(move_result);
+  players_[p]->send_results_of_move(move_result);
 }
 
 void StrategoGame::play_game(){

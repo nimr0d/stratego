@@ -10,7 +10,7 @@ using std::cin;
 using std::endl;
 
 
-Move HumanPlayer::get_move(){
+Move HumanPlayer::get_move() {
   cout << "What your move?" << 
     "Enter in the following format (row_from col_from row_to col_to)" << endl;
   int row,col, n_row, n_col;
@@ -20,7 +20,7 @@ Move HumanPlayer::get_move(){
   cin >> n_col;
 }
 
-void HumanPlayer::send_results_of_move(MoveResult move_result){
+void HumanPlayer::send_results_of_move(MoveResult move_result) {
   move_result.print();
 }
 

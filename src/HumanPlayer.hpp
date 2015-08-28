@@ -5,8 +5,8 @@
 
 class HumanPlayer : public Player {
 public:
-  Move get_move();
-  void send_results_of_move(MoveResult);
+  virtual Move get_move() override;
+  virtual void send_results_of_move(MoveResult) override;
   //  ~HumanPlayer();
 };
 

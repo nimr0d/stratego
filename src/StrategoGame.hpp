@@ -14,7 +14,7 @@ public:
   void send_move_result_to_player(MoveResult move_result, bool p);
 private:
   Board state_;
-  Player players_[2];
+  Player *players_[2];
 };
 
 
