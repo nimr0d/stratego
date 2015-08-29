@@ -47,6 +47,10 @@ class Bitboard {
 			b_[1] |= other.b_[1]; 
 		}
 
+		Bitboard operator^(const Bitboard& other) {
+			return Bitboard(b_[0] ^ other.b_[0], b_[1] ^ other.b_[1]);
+		}
+
 		void operator^=(const Bitboard& other) {
 			b_[0] ^= other.b_[0];
 			b_[1] ^= other.b_[1];
@@ -55,6 +59,14 @@ class Bitboard {
 		void operator=(const Bitboard& other) {
 			b_[0] = other.b_[0];
 			b_[1] = other.b_[1];
+		}
+
+		bool operator==(const Bitboard& other) {
+			return b_[0] == other.b_[0] && b_[1] == other.b_[1];
+		}
+
+		explicit operator bool() const { 
+		    return b_[0] | b_[1]; 
 		}
 
 		void print();

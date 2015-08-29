@@ -38,7 +38,7 @@ void Bitboards::init() {
 		}
 		AdjacentSquaresBB[s] = Bitboard(0ULL, 0ULL);
 
-		CrosshairBB[s] = RowBB[s / 10] | ColumnBB[s % 10];
+		CrosshairBB[s] = RowBB[s / 10] ^ ColumnBB[s % 10];
 	}
 
 	for (char s = 0; s < 100; ++s) {
