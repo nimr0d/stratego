@@ -17,8 +17,14 @@ void StrategoGame::send_move_result_to_player(MoveResult move_result, bool p){
 
 void StrategoGame::play_game(){
   printf("Playing the game!\n");
-
+  
   while(true){
+    /*
+    if(players_[state_.player()]->is_human()){
+      printf("It's Player's %d turn \n", state_.player() );
+      state_.print(state_.player());
+    }
+    */
     Move move = ask_player_to_make_move(state_.player());
     MoveResult move_result = state_.get_move_result(move); 
     while(!move_result.is_valid()){
@@ -26,7 +32,6 @@ void StrategoGame::play_game(){
       move = ask_player_to_make_move(state_.player());
       move_result = state_.get_move_result(move); 
     }
-    
     send_move_result_to_player(move_result, state_.player());
     state_ = state_.make_move(move);
     
