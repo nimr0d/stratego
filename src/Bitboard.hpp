@@ -3,7 +3,7 @@
 class Bitboard {
 	public:
 		Bitboard() = default;
-		
+
 		Bitboard(unsigned long long b0, unsigned long long b1) {
 			b_[0] = b0;
 			b_[1] = b1;
@@ -52,7 +52,7 @@ class Bitboard {
 			b_[1] ^= other.b_[1];
 		}
 
-		void operator=(Bitboard other) {
+		void operator=(const Bitboard& other) {
 			b_[0] = other.b_[0];
 			b_[1] = other.b_[1];
 		}
