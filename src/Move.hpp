@@ -8,7 +8,7 @@ struct Move{
   int row, col; // initial position
   int n_row, n_col; // final position
   
-  bool is_valid(Piece p) const;
+  bool is_valid(Piece) const;
 };
 
 

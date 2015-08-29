@@ -31,7 +31,7 @@ void Piece::set_player(bool player) {
   player_ = player;
 }
 
-bool Piece::operator==(const Piece& other) const{
+bool Piece::operator==(const Piece& other) const {
   return value_ == other.value_ && player_ == other.player_;
 }
 
@@ -50,6 +50,6 @@ bool Piece::is_movable() const {
   return !(value_ == BOMB || value_ == FLAG || value_ == EMPTY);
 }
 
-const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B'};
+const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B', '?'};
 
 
