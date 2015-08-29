@@ -45,7 +45,15 @@ void AIBoard::make_move(Move m) {
 
     potential_movables_ |= SquareBB[m.to]; // Movable piece moved into m.to.
     //Pieces around m.to which are the other player's are now movable.
-    movables_[!player_] |= AdjacentSquaresBB[m.to] & bad_dest_[player_] & potential_movables_;
+
+    Bitboard b = AdjacentSquaresBB[m.to] & bad_dest_[player_] & potential_movables_;
+    for (char s = (m.to > 9 ? m.to - 10 : 0); s <= m.to + 10; ++s) {
+      if (bool(b & SquareBB[s]) && (AdjacentSquaresBB[s] & bad_dest_[player_]) == bad_dest_[player_]) {
+        movables_[player_] |= SquareBB[s];
+      }
+    }
+
+    movables_[!player_] |= AdjacentSquaresBB[m.to] & bad_dest_[!player_] & potential_movables_;
   } else {
     set_piece(Piece(EMPTY,player_), m.from);
   }
