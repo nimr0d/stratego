@@ -4,10 +4,10 @@ Piece::Piece() : value_(0), player_(0) {}
 Piece::Piece(char value, bool player) : value_(value), player_(player) {}
 
 
-Piece::Piece(char value, char player, char unused){
+Piece::Piece(char value, char player, char unused) {
   player_ = (player == '1');
-  for(int i = 0; i < 14; i++){
-    if(value == symbol_[i]){
+  for(int i = 0; i < 14; ++i) {
+    if(value == symbol_[i]) {
       value_ = i;
       break;
     }
