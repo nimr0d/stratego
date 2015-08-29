@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 
-
 #include "Board.hpp"
 #include "Move.hpp"
 #include "MoveResult.hpp"

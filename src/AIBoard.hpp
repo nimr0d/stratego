@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "AIMove.hpp"
+#include "Bitboard.hpp"
 #include "Piece.hpp"
 
 class AIBoard {
@@ -18,7 +19,7 @@ public:
   void set_player(bool player);
   
   bool is_move_allowed(Move m) const;
-  AIBoard make_move(Move m) const;
+  void make_move(Move m); // Updates board state after move and changes player.
 
   std::priority_queue<AIBoard> get_child_states() const;
   
@@ -26,11 +27,15 @@ public:
   bool operator<(const AIBoard& other) const;
   
 private:
-  Piece board_[10][10];
+  Piece board_[100];
+
+  Bitboard bad_dest_[2]; // Player pieces and water areas.
+  Bitboard movables_[2]; // Movable pieces for player.
+  Bitboard potential_movables_; // All pieces of any player that are a movable type.
   std::vector<Move> moves_;
   bool player_;
   float eval_;
-  static void find_all_moves(); // FIXME: Make not static
+  static void find_all_moves(); // FIXME: Make not static.
 };
 
 #endif

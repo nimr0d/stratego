@@ -33,26 +33,41 @@ bool AIBoard::is_move_allowed(Move m) const {
   return m.to < 100 && m.from < 100 && p1.player() == player_ && p1.is_movable() && (p2.empty() || p2.player() == !player_);
 }
 
-AIBoard AIBoard::make_move(Move m) const {
-  assert(is_move_allowed(m));
-  AIBoard n_b(*this);
-  Piece p1 = n_b.piece(m.from);
-  Piece p2 = n_b.piece(m.to);
-  if(p1.defeats(p2)){
-    n_b.set_piece(Piece(EMPTY, player_), m.from);
-    n_b.set_piece(p1, m.to);
+void AIBoard::make_move(Move m) {
+  Piece p1 = piece(m.from);
+  Piece p2 = piece(m.to);
+  if(p1.defeats(p2)) {
+    set_piece(Piece(EMPTY, player_), m.from);
+    set_piece(p1, m.to);
+
+    bad_dest_[player_] |= SquareBB[m.to]; // Player changed in m.to.
+    bad_dest_[!player_] ^= SquareBB[m.to];
+
+    potential_movables_ |= SquareBB[m.to]; // Movable piece moved into m.to.
+    //Pieces around m.to which are the other player's are now movable.
+    movables_[!player_] |= AdjacentSquaresBB[m.to] & bad_dest_[player_] & potential_movables_;
   } else {
-    n_b.set_piece(Piece(EMPTY,player_), m.from);
+    set_piece(Piece(EMPTY,player_), m.from);
   }
-  return n_b;  
+  // m.from is now empty.
+  bad_dest_[player_] ^= SquareBB[m.from];
+  movables_[player_] ^= SquareBB[m.from];
+  potential_movables_ ^= SquareBB[m.from];
+
+  // Pieces around m.from are now movable.
+  movables_[0] |= AdjacentSquaresBB[m.from] & potential_movables_;
+  movables_[1] |= AdjacentSquaresBB[m.from] & potential_movables_;
+
+  player_ ^= 1;
 }
 
 std::priority_queue<AIBoard> AIBoard::get_child_states() const {
-  // TODO: logic to replace find_all_moves() with something smarter
+  // TODO: logic to replace find_all_moves() with something smarter.
   std::priority_queue<AIBoard> pq;
   find_all_moves();
   for (Move m : moves_) {
-    AIBoard b = make_move(m);
+    AIBoard b;
+    b.make_move(m);
     b.evaluate();
     pq.push(b);
   }
@@ -68,9 +83,10 @@ bool AIBoard::operator<(const AIBoard& other) const {
 }
 
 void AIBoard::find_all_moves() {
-  for (int i = 0; i < 10; ++i) {
-    for (int j = 0; j < 10; ++j) {
+  for (int i = 1; i < 9; ++i) {
+    for (int j = 1; j < 9; ++j) {
       // TODO: add all moves
+
     }
   }
 }

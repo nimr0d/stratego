@@ -34,7 +34,7 @@ Board read_board_from_file(std::string file_name){
       player = fgetc(fd);
       if(type != '.'){
 	printf("type: %c player: %c \n", type, player);
-	b.set_piece(Piece(type, player, player), i, j);
+	b.set_piece( Piece(type, player, player), i, j);
       }
       ignore_number_of_chars(fd, 1);
     }
