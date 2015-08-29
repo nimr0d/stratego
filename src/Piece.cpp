@@ -3,6 +3,17 @@
 Piece::Piece() : value_(0), player_(0) {}
 Piece::Piece(char value, bool player) : value_(value), player_(player) {}
 
+
+Piece::Piece(char value, char player, char unused){
+  player_ = (player == '1');
+  for(int i = 0; i < 14; i++){
+    if(value == symbol_[i]){
+      value_ = i;
+      break;
+    }
+  }
+}
+
 char Piece::value() const {
   return value_;
 }
@@ -51,5 +62,4 @@ bool Piece::is_movable() const {
 }
 
 const char Piece::symbol_[] = {' ', 'F', 'S', '2', '3', '4', '5', '6', '7', '8', '9', 'M', 'B', '?'};
-
 

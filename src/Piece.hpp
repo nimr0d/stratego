@@ -16,6 +16,8 @@ class Piece{
 public:
   Piece();
   Piece(char value, bool player);
+  Piece(char value, char player, char unused);
+  
   char value() const;
   bool player() const;
   char symbol() const;
