@@ -4,41 +4,33 @@ class Bitboard {
 	public:
 		Bitboard() = default;
 
-		Bitboard(unsigned long long b0, unsigned long long b1) {
-			b_[0] = b0;
-			b_[1] = b1;
-		}
+		Bitboard(unsigned long long b0, unsigned long long b1) : b_{b0, b1} {}
 
-		Bitboard(const Bitboard& other) {
-			b_[0] = other.b_[0];
-			b_[1] = other.b_[1];
-		}
-
-		Bitboard operator<<(int i) {
-			unsigned long long r;
-			if (i < 64) {
-				r = b_[0] >> (64 - i);
-			} else {
-				r = b_[0] << (i - 64);
+		Bitboard operator<<(int shift) const {
+			if (shift >= 64) {
+				return Bitboard(0ULL, b_[0] << (shift - 64));
 			}
-			return Bitboard(b_[0] << i, (b_[1] << i) | r);
+			if (shift == 0) return *this;
+			return Bitboard(b_[0] << shift, (b_[1] << shift) | (b_[0] >> (64 - shift)));
 		}
 
-		Bitboard operator>>(int i) {
-			unsigned long long r;
-			if (i < 64) {
-				r = b_[1] << (64 - i);
-			} else {
-				r = b_[1] >> (i - 64);
+		Bitboard operator>>(int shift) const {
+			if (shift >= 64) {
+				return Bitboard(b_[1] >> (shift - 64), 0ULL);
 			}
-			return Bitboard((b_[0] >> i) | r, b_[1] >> i);
-		}
+			if (shift == 0) return *this;
+			return Bitboard((b_[0] >> shift) | (b_[1] << (64 - shift)), b_[1] >> shift);
 
-		Bitboard operator&(const Bitboard& other) {
+		Bitboard operator&(const Bitboard& other) const {
 			return Bitboard(b_[0] & other.b_[0], b_[1] & other.b_[1]);
 		}
 
-		Bitboard operator|(const Bitboard& other) {
+		void operator&=(const Bitboard& other) {
+			b_[0] &= other.b_[0];
+			b_[1] &= other.b_[1]; 
+		}
+
+		Bitboard operator|(const Bitboard& other) const {
 			return Bitboard(b_[0] | other.b_[0], b_[1] | other.b_[1]);
 		}
 
@@ -47,7 +39,7 @@ class Bitboard {
 			b_[1] |= other.b_[1]; 
 		}
 
-		Bitboard operator^(const Bitboard& other) {
+		Bitboard operator^(const Bitboard& other) const {
 			return Bitboard(b_[0] ^ other.b_[0], b_[1] ^ other.b_[1]);
 		}
 
@@ -56,12 +48,7 @@ class Bitboard {
 			b_[1] ^= other.b_[1];
 		}
 
-		void operator=(const Bitboard& other) {
-			b_[0] = other.b_[0];
-			b_[1] = other.b_[1];
-		}
-
-		bool operator==(const Bitboard& other) {
+		bool operator==(const Bitboard& other) const {
 			return b_[0] == other.b_[0] && b_[1] == other.b_[1];
 		}
 
@@ -69,7 +56,8 @@ class Bitboard {
 		    return b_[0] | b_[1]; 
 		}
 
-		void print();
+		void print() const;
+	
 	private:
 		unsigned long long b_[2];
 

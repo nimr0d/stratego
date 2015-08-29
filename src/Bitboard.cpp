@@ -1,7 +1,7 @@
 #include "Bitboard.hpp"
 #include <iostream>
 
-void Bitboard::print() {
+void Bitboard::print() const {
 	for (int i = 0; i < 10; ++i) {
 		for (int j = 0; j < 10; ++j) {
 			char c = 10 * i + j;

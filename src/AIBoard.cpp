@@ -41,7 +41,7 @@ void AIBoard::make_move(Move m) {
     set_piece(p1, m.to);
 
     bad_dest_[player_] |= SquareBB[m.to]; // Player changed in m.to.
-    bad_dest_[!player_] ^= SquareBB[m.to];
+    bad_dest_[player_ ^ 1] ^= SquareBB[m.to];
 
     potential_movables_ |= SquareBB[m.to]; // Movable piece moved into m.to.
     //Pieces around m.to which are the other player's are now movable.
