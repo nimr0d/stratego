@@ -7,6 +7,7 @@
 #include "AIMove.hpp"
 #include "Bitboard.hpp"
 #include "Piece.hpp"
+#include <stdio.h>
 
 class AIBoard {
 public:
@@ -17,24 +18,42 @@ public:
   void set_piece(Piece p, char pos);
   bool player() const;
   void set_player(bool player);
+  void update_bitboards(); // Probably only used for init. Might rename init_bitboards.
   
-  bool is_move_allowed(Move m) const;
-  void make_move(Move m); // Updates board state after move and changes player.
+  void make_move(AIMove m); // Updates board state after move and changes player.
+  
+  // Temporary -- just for testing a few things.
+  void print() {
+    for(int i = 0; i < 10; ++i){
+      for(int j = 0; j < 10; ++j){
+        Piece tmp = board_[10 * i + j];
+          if(tmp.empty()){
+            printf(".");
+          }
+          else {
+            printf("%c", tmp.symbol());
+          }
+          printf(" ");
+        }
+       printf("\n");
+     }
+    printf("\n");
 
-  std::priority_queue<AIBoard> get_child_states() const;
-  
-  bool operator==(const AIBoard& other) const;
-  bool operator<(const AIBoard& other) const;
-  
+    for (int i = 0; i < 2; ++i) {
+      bad_dest_[i].print();
+      printf("\n");
+      movables_[i].print();
+      printf("\n");
+    }
+    potential_movables_.print();
+  }
 private:
   Piece board_[100];
 
   Bitboard bad_dest_[2]; // Player pieces and water areas.
   Bitboard movables_[2]; // Movable pieces for player.
   Bitboard potential_movables_; // All pieces of any player that are a movable type.
-  std::vector<Move> moves_;
   bool player_;
-  float eval_;
   static void find_all_moves(); // FIXME: Make not static.
 };
 

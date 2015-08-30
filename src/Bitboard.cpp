@@ -20,6 +20,7 @@ Bitboard AdjacentSquaresBB[100];
 Bitboard ColumnBB[10];
 Bitboard RowBB[10];
 Bitboard CrosshairBB[100];
+Bitboard WaterAreasBB = Bitboard(0x330cc0000000000ULL, 0ULL);
 
 void Bitboards::init() {
 	for (char i = 0; i < 10; ++i) {

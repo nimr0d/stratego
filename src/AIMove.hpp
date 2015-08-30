@@ -1,7 +1,7 @@
 #ifndef _H_AIMOVE_
 #define _H_AIMOVE_
 
-struct Move{
+struct AIMove{
   char from;
   char to;
 };

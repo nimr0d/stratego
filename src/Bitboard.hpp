@@ -53,6 +53,10 @@ class Bitboard {
 			return b_[0] == other.b_[0] && b_[1] == other.b_[1];
 		}
 
+		bool operator!=(const Bitboard& other) const {
+			return (b_[0] ^ other.b_[0]) || (b_[1] ^ other.b_[1]);
+		}
+
 		explicit operator bool() const { 
 		    return b_[0] | b_[1]; 
 		}
@@ -69,6 +73,7 @@ extern Bitboard AdjacentSquaresBB[100]; // Bitboard of adjacent squares for each
 extern Bitboard ColumnBB[10];
 extern Bitboard RowBB[10];
 extern Bitboard CrosshairBB[100]; // Row and column for every square
+extern Bitboard WaterAreasBB;
 namespace Bitboards {
 void init();
 }
