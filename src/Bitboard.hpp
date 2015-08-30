@@ -20,6 +20,7 @@ class Bitboard {
 			}
 			if (shift == 0) return *this;
 			return Bitboard((b_[0] >> shift) | (b_[1] << (64 - shift)), b_[1] >> shift);
+		}
 
 		Bitboard operator&(const Bitboard& other) const {
 			return Bitboard(b_[0] & other.b_[0], b_[1] & other.b_[1]);
@@ -62,6 +63,7 @@ class Bitboard {
 		unsigned long long b_[2];
 
 };
+
 extern Bitboard SquareBB[100]; // Bitboard for each square
 extern Bitboard AdjacentSquaresBB[100]; // Bitboard of adjacent squares for each square
 extern Bitboard ColumnBB[10];

@@ -11,7 +11,7 @@
 class AIBoard {
 public:
   AIBoard();
-  float evaluate() const; // Evaluates board and returns value.
+  float evaluate(); // Evaluates board and returns value.
 
   Piece piece(char pos) const;
   void set_piece(Piece p, char pos);
@@ -34,7 +34,7 @@ private:
   Bitboard potential_movables_; // All pieces of any player that are a movable type.
   std::vector<Move> moves_;
   bool player_;
-  mutable float eval_;
+  float eval_;
   static void find_all_moves(); // FIXME: Make not static.
 };
 
