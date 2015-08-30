@@ -2,7 +2,7 @@
 #include <iostream>
 
 void Bitboard::print() const {
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 9; i >= 0; --i) {
 		for (int j = 0; j < 10; ++j) {
 			char c = 10 * i + j;
 			if (c < 64) {

@@ -1,9 +1,6 @@
 #ifndef _H_AIBOARD_
 #define _H_AIBOARD_
 
-#include <queue>
-#include <vector>
-
 #include "AIMove.hpp"
 #include "Bitboard.hpp"
 #include "Piece.hpp"
@@ -24,7 +21,7 @@ public:
   
   // Temporary -- just for testing a few things.
   void print() {
-    for(int i = 0; i < 10; ++i){
+    for(int i = 9; i >= 0; --i){
       for(int j = 0; j < 10; ++j){
         Piece tmp = board_[10 * i + j];
           if(tmp.empty()){

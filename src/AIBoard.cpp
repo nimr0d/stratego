@@ -39,7 +39,7 @@ void AIBoard::update_bitboards() {
   for (char s = 0; s < 100; ++s) {
     if (board_[s].is_movable()) {
       potential_movables_ |= SquareBB[s];
-      if ((AdjacentSquaresBB[s] & bad_dest_[player_]) != AdjacentSquaresBB[s]) {
+      if ((AdjacentSquaresBB[s] & bad_dest_[board_[s].player()]) != AdjacentSquaresBB[s]) {
         movables_[board_[s].player()] |= SquareBB[s];
       }
     }
