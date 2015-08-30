@@ -57,6 +57,25 @@ class Bitboard {
 			return (b_[0] ^ other.b_[0]) || (b_[1] ^ other.b_[1]);
 		}
 
+		// gcc only
+		char lsb() {
+			char c = __builtin_ffsll(b_[0]);
+			if (c == 0) {
+				c = __builtin_ffsll(b_[1]);
+			}
+			return c;
+		}
+		//gcc only
+		char unset_lsb() {
+			char c = __builtin_ffsll(b_[0]);
+			b_[0] &= (b_[0] - 1);
+			if (c == 0) {
+				c = __builtin_ffsll(b_[1]);
+				b_[1] &= (b_[1] - 1);
+			}
+			return c;
+		}
+
 		explicit operator bool() const { 
 		    return b_[0] | b_[1]; 
 		}

@@ -62,7 +62,7 @@ void test_AIBoard() {
   b.set_piece(Piece(SCOUT, 1), 61);
   b.set_piece(Piece(MARSHAL, 1), 62);
   b.set_piece(Piece(MINER, 1), 63);
-  b.set_piece(Piece(7, 1), 64);
+  b.set_piece(Piece(SPY, 1), 64);
   b.set_piece(Piece(SCOUT, 1), 65);
   b.set_piece(Piece(6, 1), 66);
   b.set_piece(Piece(SCOUT, 1), 67);

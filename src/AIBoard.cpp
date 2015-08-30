@@ -61,13 +61,14 @@ void AIBoard::make_move(AIMove m) {
     //Pieces around m.to which are the other player's are now movable.
 
     Bitboard b = AdjacentSquaresBB[m.to] & bad_dest_[player_] & potential_movables_;
-    // TODO: Fix this to make use of bitboard serialization
-    for (char s = (m.to > 9 ? m.to - 10 : 0); s <= m.to + 10; ++s) {
-      if (bool(b & SquareBB[s]) && (AdjacentSquaresBB[s] & bad_dest_[player_]) == AdjacentSquaresBB[s]) {
+    char s;
+    while (s = b.unset_lsb()) {
+      if ((AdjacentSquaresBB[s] & bad_dest_[player_]) == AdjacentSquaresBB[s]) {
         movables_[player_] |= SquareBB[s];
       }
     }
-
+    movables_[player_] |= SquareBB[m.to];
+    movables_[!player_] ^= SquareBB[m.to] & potential_movables_;
     movables_[!player_] |= AdjacentSquaresBB[m.to] & bad_dest_[!player_] & potential_movables_;
   }
 
