@@ -102,14 +102,8 @@ void test_AIBoard() {
   b.update_bitboards();
 
   b.print();
-  
-  AIMove m;
-  m.from = 34;
-  m.to = 64;
 
-  b.make_move(m);
-
-  b.print();
+  b.get_children();
 }
 
 #endif

@@ -49,6 +49,10 @@ class Bitboard {
 			b_[1] ^= other.b_[1];
 		}
 
+		Bitboard operator~() const {
+			return Bitboard(~b_[0], ~b_[1]);
+		}
+
 		bool operator==(const Bitboard& other) const {
 			return (b_[0] == other.b_[0]) && (b_[1] == other.b_[1]);
 		}
