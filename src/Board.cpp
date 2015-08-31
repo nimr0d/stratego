@@ -17,15 +17,27 @@ using std::cout;
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
 
-Board::Board() : player_(0){}
+Board::Board() : player_(0){
+  init_cannot_be_reached_array();
+}
 
 Board::Board(const Board& b){
+  init_cannot_be_reached_array();
   for(int i = 0; i < 10; ++i){
     for(int j = 0; j < 10; ++j){
       board_[i][j] = b.piece(i, j);
     }
   }
   player_ = b.player();
+}
+
+void Board::init_cannot_be_reached_array(){
+  for(int i = 0; i < 10; i++){
+    for(int j = 0; j < 10; j++){
+      cannot_be_reached_[i][j] = false;
+    }
+  }
+  cannot_be_reached_[6][6] = true;
 }
 
 Piece Board::piece(int row, int col) const{
@@ -49,7 +61,7 @@ bool Board::is_scout_move_valid(Move m) const {
     int big_col = MAX(m.col, m.n_col);
     int small_col = MIN(m.col, m.n_col);
     for(int i = small_col + 1; i < big_col; ++i) {
-      if(!board_[m.row][i].empty()) {
+      if(!board_[m.row][i].empty() || cannot_be_reached_[m.n_row][m.n_col]) {
         return false; 
       }
     }
@@ -58,7 +70,7 @@ bool Board::is_scout_move_valid(Move m) const {
     int big_row = MAX(m.row, m.n_row);
     int small_row = MIN(m.row, m.n_row);
     for(int i = small_row + 1; i < big_row; ++i) {
-      if(!board_[i][m.col].empty()) {
+      if(!board_[i][m.col].empty() || cannot_be_reached_[m.n_row][m.n_col]) {
         return false; 
       }
     }
@@ -72,10 +84,12 @@ bool Board::is_move_allowed(Move m) const {
       return false;
     }
   }
-  return player_allowed_to_move_piece(m.row, m.col) &&
-        in_bounds(m.n_row, m.n_col) && board_[m.row][m.col].is_movable() &&
-        m.is_valid(board_[m.row][m.col]) &&
-        (board_[m.row][m.col].player() != board_[m.n_row][m.n_col].player() || board_[m.n_row][m.n_col].empty());
+  return 
+    !cannot_be_reached_[m.n_row][m.n_col] &&
+    player_allowed_to_move_piece(m.row, m.col) &&
+    in_bounds(m.n_row, m.n_col) && board_[m.row][m.col].is_movable() &&
+    m.is_valid(board_[m.row][m.col]) &&
+    (board_[m.row][m.col].player() != board_[m.n_row][m.n_col].player() || board_[m.n_row][m.n_col].empty());
 }
 
 MoveResult Board::get_move_result(Move m) const{
@@ -110,6 +124,10 @@ Board Board::make_move(Move m) const{
   return n_b;  
 }
 
+bool Board::cannot_be_reached(int row, int col) const{
+  return cannot_be_reached_[row][col];
+}
+
 
 void Board::print(bool player) const{
   for(int i = 0; i < 10; ++i){
@@ -119,24 +137,26 @@ void Board::print(bool player) const{
   for(int i = 0; i < 10; ++i){
     for(int j = 0; j < 10; ++j){
       const Piece *tmp = &board_[i][j];
-      if(tmp->empty()){
-       printf(".");
-     }
-     else{
-       if(tmp->player() == player){
-         printf("%c", tmp->symbol());
-       } else{
-         printf("?");
-       }
-     }
-     printf(" ");
-   }
-   printf("\n");
- }
- for(int i = 0; i < 10; ++i){
-  printf("__");
-}
-printf("\n");
+      if(cannot_be_reached_[i][j]){
+	printf("#");
+      } else if(tmp->empty()){
+	printf(".");
+      }
+      else{
+	if(tmp->player() == player){
+	  printf("%c", tmp->symbol());
+	} else{
+	  printf("?");
+	}
+      }
+      printf(" ");
+    }
+    printf("\n");
+  }
+  for(int i = 0; i < 10; ++i){
+    printf("__");
+  }
+  printf("\n");
 }
 
 

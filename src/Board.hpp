@@ -25,9 +25,14 @@ public:
   bool player() const;
   
   bool is_scout_move_valid(Move m) const;
+  bool cannot_be_reached(int row, int col) const; 
+  
+  void init_cannot_be_reached_array();
 private:
   Piece board_[10][10];
   bool player_;
+  
+  bool cannot_be_reached_[10][10]; //has water in it
 };
 
 bool in_bounds(int row, int col);
