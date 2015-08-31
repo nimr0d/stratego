@@ -50,7 +50,7 @@ class Bitboard {
 		}
 
 		bool operator==(const Bitboard& other) const {
-			return b_[0] == other.b_[0] && b_[1] == other.b_[1];
+			return (b_[0] == other.b_[0]) && (b_[1] == other.b_[1]);
 		}
 
 		bool operator!=(const Bitboard& other) const {
@@ -60,8 +60,8 @@ class Bitboard {
 		// gcc only
 		char lsb() {
 			char c = __builtin_ffsll(b_[0]);
-			if (c == 0) {
-				c = __builtin_ffsll(b_[1]) + 64;
+			if (c == 0ULL && b_[1] != 0ULL) {
+				c = __builtin_ffsll(b_[1]) + 64ULL;
 			}
 			return c;
 		}
@@ -69,7 +69,7 @@ class Bitboard {
 		char unset_lsb() {
 			char c = __builtin_ffsll(b_[0]);
 			b_[0] &= (b_[0] - 1);
-			if (c == 0) {
+			if (c == 0 && b_[1] != 0) {
 				c = __builtin_ffsll(b_[1]) + 64;
 				b_[1] &= (b_[1] - 1);
 			}

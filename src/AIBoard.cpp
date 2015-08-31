@@ -63,8 +63,9 @@ void AIBoard::make_move(AIMove m) {
     Bitboard b = AdjacentSquaresBB[m.to] & bad_dest_[player_] & potential_movables_;
     char s;
     while (s = b.unset_lsb()) {
+      --s;
       if ((AdjacentSquaresBB[s] & bad_dest_[player_]) == AdjacentSquaresBB[s]) {
-        movables_[player_] |= SquareBB[s];
+        movables_[player_] ^= SquareBB[s];
       }
     }
     movables_[player_] |= SquareBB[m.to];
